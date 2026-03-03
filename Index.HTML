@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shree Lucky Jewellers – trust since generation</title>
+    <!-- Font Awesome 6 (free) for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+        body {
+            background: #fcf8f0;  /* soft ivory */
+            color: #2e241f;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        /* gold & luxury touches */
+        .gold-text {
+            color: #b38b3c;
+        }
+        .gold-bg {
+            background: #b38b3c;
+            color: white;
+        }
+        .gold-border {
+            border-color: #d4af37;
+        }
+        /* header / nav */
+        header {
+            background: #1f2a2e;  /* deep charcoal with a hint of greenish-black – looks elegant */
+            padding: 1rem 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 3px solid #b38b3c;
+        }
+        .header-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .logo-area h1 {
+            font-size: 1.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #f5e7d9;
+        }
+        .logo-area h1 i {
+            color: #d4af37;
+            margin-right: 8px;
+        }
+        .logo-area p {
+            font-size: 0.8rem;
+            color: #c9b6a5;
+            letter-spacing: 1.5px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        .nav-links a {
+            color: #efebe7;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.2rem;
+            transition: 0.2s;
+            padding: 0.5rem 0.2rem;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            border-bottom-color: #d4af37;
+            color: #ffd966;
+        }
+        /* main content */
+        main {
+            flex: 1;
+            max-width: 1200px;
+            width: 90%;
+            margin: 2rem auto;
+            background: rgba(255,255,255,0.7);
+            backdrop-filter: blur(2px);
+            padding: 2rem 2.5rem;
+            border-radius: 32px 32px 16px 16px;
+            box-shadow: 0 20px 35px -8px rgba(0,0,0,0.2);
+            border: 1px solid #f0e0c4;
+        }
+        .page {
+            display: none;
+            animation: fade 0.3s ease;
+        }
+        .page.active-page {
+            display: block;
+        }
+        @keyframes fade {
+            from { opacity: 0.3; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* homepage card */
+        .jeweller-card {
+            text-align: center;
+            background: linear-gradient(145deg, #fefcf7, #f7ede1);
+            padding: 2.5rem 2rem;
+            border-radius: 60px 60px 30px 30px;
+            border: 2px dashed #d4af37;
+            box-shadow: inset 0 2px 10px #fff5e0, 0 15px 25px rgba(110, 70, 20, 0.15);
+        }
+        .shop-name {
+            font-size: 3.5rem;
+            font-weight: 700;
+            font-family: 'Times New Roman', serif;
+            color: #2c1e0e;
+            text-shadow: 3px 3px 0 #eed9b2;
+        }
+        .shop-name i {
+            color: #b38b3c;
+            font-size: 3rem;
+        }
+        .divider {
+            width: 180px;
+            height: 4px;
+            background: #b38b3c;
+            margin: 1.2rem auto;
+            border-radius: 4px;
+        }
+        .details-block {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem;
+            margin: 2rem 0 1rem;
+        }
+        .detail-item {
+            background: #1f2a2e;
+            padding: 1.5rem 2rem;
+            border-radius: 48px 16px 48px 16px;
+            color: #f5e7d9;
+            min-width: 230px;
+            box-shadow: 0 10px 0 #0d1215;
+        }
+        .detail-item i {
+            font-size: 2.5rem;
+            color: #e6b422;
+            margin-bottom: 0.5rem;
+        }
+        .detail-item .label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #c0a37a;
+        }
+        .detail-item .value {
+            font-size: 1.6rem;
+            font-weight: 600;
+            word-break: break-word;
+        }
+        .value a {
+            color: #f9e0a0;
+            text-decoration: none;
+        }
+        .value a:hover {
+            text-decoration: underline;
+            color: white;
+        }
+        .address-block {
+            background: #ecdbbd;
+            padding: 1.2rem;
+            border-radius: 50px 10px 50px 10px;
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-top: 1.8rem;
+            border: 1px solid #a9824a;
+        }
+        .address-block i {
+            color: #a0592c;
+        }
+
+        /* page titles */
+        h2 {
+            font-size: 2.5rem;
+            border-left: 10px solid #b38b3c;
+            padding-left: 1.2rem;
+            margin-bottom: 2rem;
+            color: #1f2a2e;
+            font-weight: 600;
+        }
+        h2 i {
+            color: #b38b3c;
+        }
+
+        /* privacy/terms boxes */
+        .policy-box, .contact-box {
+            background: #fefcf5;
+            padding: 2rem;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid #e4cfaa;
+        }
+        .policy-box h3 {
+            color: #9e742a;
+            margin: 1.5rem 0 0.5rem;
+            font-size: 1.8rem;
+            border-bottom: 2px solid #e9d6b5;
+            padding-bottom: 6px;
+        }
+        .policy-box p {
+            margin-bottom: 1rem;
+            font-size: 1.15rem;
+        }
+
+        .policy-box ul {
+            margin: 1rem 0 1.5rem 2rem;
+        }
+        .policy-box li {
+            margin: 0.4rem 0;
+            font-size: 1.1rem;
+        }
+
+        /* contact page extra */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .contact-card {
+            background: #f6efe4;
+            padding: 2rem;
+            border-radius: 24px;
+            border: 1px solid #d8c29b;
+        }
+        .contact-card i {
+            font-size: 2.2rem;
+            background: #1f2a2e;
+            color: #ffd88f;
+            padding: 1rem;
+            border-radius: 60%;
+            margin-bottom: 1rem;
+        }
+        .contact-card h3 {
+            font-size: 2rem;
+            color: #2c3e42;
+        }
+        .map-static {
+            background: #cbb99b;
+            color: #1e2c12;
+            padding: 2rem;
+            border-radius: 30px;
+            text-align: center;
+            font-weight: 500;
+            border: 3px solid #b38b3c;
+        }
+
+        /* footer */
+        footer {
+            background: #0f1a1d;
+            color: #ddd2c5;
+            padding: 2rem 2rem 1.2rem;
+            border-top: 6px solid #b38b3c;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+        .footer-links a {
+            color: #f3d9b1;
+            text-decoration: none;
+            margin: 0 1rem 0 0;
+            font-weight: 400;
+            border-right: 1px solid #7a653b;
+            padding-right: 1rem;
+        }
+        .footer-links a:last-child {
+            border-right: none;
+        }
+        .footer-links a:hover {
+            color: #f5e56b;
+        }
+        .copyright {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            color: #9b8c78;
+        }
+        .copyright i {
+            color: #b38b3c;
+        }
+
+        /* small responsive */
+        @media (max-width: 750px) {
+            .header-container {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .nav-links {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .shop-name {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-area">
+                <h1><i class="fas fa-gem"></i> Shree Lucky Jewellers</h1>
+                <p>EST. SINCE 1988 · JODHPUR</p>
+            </div>
+            <div class="nav-links">
+                <a href="#" id="nav-home" class="active"><i class="fas fa-home"></i> Home</a>
+                <a href="#" id="nav-privacy"><i class="fas fa-shield-alt"></i> Privacy</a>
+                <a href="#" id="nav-terms"><i class="fas fa-file-contract"></i> Terms</a>
+                <a href="#" id="nav-contact"><i class="fas fa-phone-alt"></i> Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- HOME PAGE -->
+        <div id="home-page" class="page active-page">
+            <div class="jeweller-card">
+                <div class="shop-name">
+                    <i class="fas fa-crown"></i> श्री लकी ज्वैलर्स
+                </div>
+                <div class="divider"></div>
+                <p style="font-size: 1.5rem; font-style: italic; color: #4d3f2d;">" tradition crafted in gold & trust "</p>
+
+                <div class="details-block">
+                    <div class="detail-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div class="label">call us (whatsapp)</div>
+                        <div class="value"><a href="tel:9672009050">9672009050</a></div>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-envelope"></i>
+                        <div class="label">email</div>
+                        <div class="value"><a href="mailto:shreeluckyjewellers@gmail.com">shreeluckyjewellers<br>@gmail.com</a></div>
+                    </div>
+                </div>
+
+                <div class="address-block">
+                    <i class="fas fa-map-pin"></i>   Rajasthan, Jodhpur - 342027  (near Sojati Gate)
+                </div>
+                <div style="margin-top: 2rem; font-size: 1.2rem; background: #e5d5b9; padding: 0.8rem; border-radius: 40px;">
+                    <i class="fas fa-star gold-text"></i>  BIS Hallmark · exclusive kundan · polki  <i class="fas fa-star gold-text"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRIVACY POLICY PAGE -->
+        <div id="privacy-page" class="page">
+            <h2><i class="fas fa-lock"></i> Privacy Policy</h2>
+            <div class="policy-box">
+                <p><strong>Last updated:</strong> March 2025</p>
+                <p>At Shree Lucky Jewellers, we value the trust you place in us. This policy describes how we handle your information when you visit our store or contact us.</p>
+                <h3>🔐 Information we collect</h3>
+                <p>We may collect personal details you provide voluntarily, such as name, mobile number (9672009050), email address (<strong>shreeluckyjewellers@gmail.com</strong>), and address (Jodhpur, Rajasthan 342027) for order processing, inquiries, and jewellery designing consultations.</p>
+                <h3>📦 How we use information</h3>
+                <ul>
+                    <li>To customise your jewellery experience and share new arrivals.</li>
+                    <li>To process your requests and communicate via call/email.</li>
+                    <li>To improve our services and maintain records.</li>
+                </ul>
+                <h3>🤝 Sharing & security</h3>
+                <p>We never sell or rent your personal data. Information may be shared only with trusted partners (e.g., courier) to fulfil your orders. We follow industry standards to protect your data.</p>
+                <h3>📍 Our physical presence</h3>
+                <p>Shree Lucky Jewellers, Rajasthan, Jodhpur 342027. You may visit us to review or request deletion of your data. For any privacy concerns, contact us via the <a href="#" id="priv-to-contact" style="color:#b38b3c; font-weight:500;">contact page</a>.</p>
+                <p style="margin-top: 1.5rem;"><i class="fas fa-gem gold-text"></i> By using our services, you agree to this privacy policy.</p>
+            </div>
+        </div>
+
+        <!-- TERMS AND CONDITIONS PAGE -->
+        <div id="terms-page" class="page">
+            <h2><i class="fas fa-scale-balanced"></i> Terms & Conditions</h2>
+            <div class="policy-box">
+                <h3>📋 General</h3>
+                <p>These terms govern your engagement with Shree Lucky Jewellers (store & online). By contacting us or purchasing, you accept these terms.</p>
+                <h3>💰 Pricing & payments</h3>
+                <p>Gold/silver rates are subject to daily market change. Final prices will be confirmed at the time of billing. We accept UPI, bank transfer, and card payments. For special orders an advance may be required.</p>
+                <h3>🔄 Returns & exchanges</h3>
+                <p>We take pride in our craftsmanship. Exchange or return is possible within 7 days with original bill, provided jewellery is unused and undamaged. Customised pieces are non-refundable.</p>
+                <h3>⚖️ Hallmark & purity</h3>
+                <p>All gold jewellery is BIS hallmarked as per government standards. Gemstones and diamonds are certified upon request.</p>
+                <h3>📞 Communication</h3>
+                <p>You can reach us at <strong>9672009050</strong> or <strong>shreeluckyjewellers@gmail.com</strong>. We may send important updates related to your order.</p>
+                <h3>📍 Jurisdiction</h3>
+                <p>All disputes are subject to the exclusive jurisdiction of courts in Jodhpur, Rajasthan (342027).</p>
+                <p style="border-top: 2px solid #e6cfaf; margin-top: 2rem; padding-top: 1rem;"><i class="fas fa-store"></i> Our store timings: 10:30 AM – 8:30 PM (Monday to Saturday).</p>
+            </div>
+        </div>
+
+        <!-- CONTACT PAGE -->
+        <div id="contact-page" class="page">
+            <h2><i class="fas fa-address-card"></i> Contact Us</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <i class="fas fa-store"></i>
+                    <h3>visit / reach</h3>
+                    <p style="font-size: 1.3rem;"><i class="fas fa-location-dot gold-text"></i> Rajasthan, Jodhpur – 342027</p>
+                    <p><strong>Landmark:</strong> near Sojati Gate, inside old city</p>
+                    <p style="margin: 1.5rem 0;"><i class="fas fa-phone-alt"></i> <strong>9672009050</strong> (call or WhatsApp)</p>
+                    <p><i class="fas fa-envelope"></i> <strong>shreeluckyjewellers<br>@gmail.com</strong></p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>working hours</h3>
+                    <p>Mon – Sat : 10:30 – 20:30</p>
+                    <p>Sunday : closed (family day)</p>
+                    <div style="background: #b38b3c20; border-radius: 24px; padding: 1rem; margin: 1.5rem 0;">
+                        <i class="fas fa-truck"></i>  free polishing & resizing for loyal customers
+                    </div>
+                </div>
+            </div>
+            <!-- simple static map representation -->
+            <div class="map-static">
+                <i class="fas fa-map-marked-alt" style="font-size: 2.5rem;"></i>
+                <p style="font-size: 1.7rem;">📍 Jodhpur, Rajasthan (342027)</p>
+                <p><i class="fas fa-route"></i>  10 min from clock tower · landmark: Lucky chowk</p>
+            </div>
+            <div style="margin-top: 2rem; text-align: right;">
+                <i class="fas fa-gem gold-text"></i>  we reply within 2 hours during business days  <i class="fas fa-gem gold-text"></i>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div style="font-size: 1.4rem; font-weight: 300;">
+                <i class="fas fa-crown gold-text"></i> Shree Lucky Jewellers
+            </div>
+            <div class="footer-links">
+                <a href="#" id="foot-home">Home</a>
+                <a href="#" id="foot-privacy">Privacy</a>
+                <a href="#" id="foot-terms">Terms</a>
+                <a href="#" id="foot-contact">Contact</a>
+            </div>
+        </div>
+        <div class="copyright">
+            <i class="far fa-copyright"></i> 2025 Shree Lucky Jewellers (Jodhpur, Rajasthan 342027). All rights reserved.
+        </div>
+    </footer>
+
+    <!-- simple vanilla JS for navigation -->
+    <script>
+        (function() {
+            // get all pages
+            const homePage = document.getElementById('home-page');
+            const privacyPage = document.getElementById('privacy-page');
+            const termsPage = document.getElementById('terms-page');
+            const contactPage = document.getElementById('contact-page');
+            
+            // nav links
+            const navHome = document.getElementById('nav-home');
+            const navPrivacy = document.getElementById('nav-privacy');
+            const navTerms = document.getElementById('nav-terms');
+            const navContact = document.getElementById('nav-contact');
+            
+            // footer links
+            const footHome = document.getElementById('foot-home');
+            const footPrivacy = document.getElementById('foot-privacy');
+            const footTerms = document.getElementById('foot-terms');
+            const footContact = document.getElementById('foot-contact');
+
+            // small helper to switch active page and active nav style
+            function setActivePage(active) {
+                // hide all
+                homePage.classList.remove('active-page');
+                privacyPage.classList.remove('active-page');
+                termsPage.classList.remove('active-page');
+                contactPage.classList.remove('active-page');
+                // remove active class from all nav links
+                [navHome, navPrivacy, navTerms, navContact].forEach(el => el.classList.remove('active'));
+                
+                if (active === 'home') {
+                    homePage.classList.add('active-page');
+                    navHome.classList.add('active');
+                } else if (active === 'privacy') {
+                    privacyPage.classList.add('active-page');
+                    navPrivacy.classList.add('active');
+                } else if (active === 'terms') {
+                    termsPage.classList.add('active-page');
+                    navTerms.classList.add('active');
+                } else if (active === 'contact') {
+                    contactPage.classList.add('active-page');
+                    navContact.classList.add('active');
+                }
+                // scroll to top for comfort
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // event listeners
+            navHome.addEventListener('click', (e) => { e.preventDefault(); setActivePage('home'); });
+            navPrivacy.addEventListener('click', (e) => { e.preventDefault(); setActivePage('privacy'); });
+            navTerms.addEventListener('click', (e) => { e.preventDefault(); setActivePage('terms'); });
+            navContact.addEventListener('click', (e) => { e.preventDefault(); setActivePage('contact'); });
+
+            footHome.addEventListener('click', (e) => { e.preventDefault(); setActivePage('home'); });
+            footPrivacy.addEventListener('click', (e) => { e.preventDefault(); setActivePage('privacy'); });
+            footTerms.addEventListener('click', (e) => { e.preventDefault(); setActivePage('terms'); });
+            footContact.addEventListener('click', (e) => { e.preventDefault(); setActivePage('contact'); });
+
+            // special link from privacy to contact (in text)
+            const privToContact = document.getElementById('priv-to-contact');
+            if (privToContact) {
+                privToContact.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    setActivePage('contact');
+                });
+            }
+        })();
+    </script>
+    <!-- inline contact privacy hint: all details appear throughout -->
+</body>
+</html>
